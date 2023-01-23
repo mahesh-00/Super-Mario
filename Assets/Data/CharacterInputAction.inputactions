@@ -1,0 +1,74 @@
+{
+    "name": "CharacterInputAction",
+    "maps": [
+        {
+            "name": "Movement",
+            "id": "acaf8787-20b1-48c4-89bd-3ce99bdc2cc4",
+            "actions": [
+                {
+                    "name": "WalkLeft",
+                    "type": "Value",
+                    "id": "835bbfd0-aaa2-487a-85c9-1f55448f5acb",
+                    "expectedControlType": "Key",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "WalkRight",
+                    "type": "Value",
+                    "id": "492660e8-89d5-41ca-a243-7402fc142169",
+                    "expectedControlType": "Key",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "e45354b0-5cb5-4459-b6bb-c5b2dd8be9c9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8d2dccaf-c786-4413-8e48-5c425af55019",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "756996ab-8e50-4485-a166-80a7c706c053",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WalkLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6d38c278-d528-4aec-ae22-6d2b6b226e37",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WalkRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
