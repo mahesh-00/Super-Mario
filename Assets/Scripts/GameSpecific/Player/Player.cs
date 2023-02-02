@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -25,6 +23,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //Debug.Log("Mouse pos in screen space: "+ Input.mousePosition+" World space: "+ Camera.main.ScreenToWorldPoint(Input.mousePosition));
+         // Get the object's position in world space
+       
     }
 }

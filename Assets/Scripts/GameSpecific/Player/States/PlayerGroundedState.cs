@@ -13,7 +13,7 @@ public class PlayerGroundedState : PlayerBaseState
 
     public override void EnterState()
     {
-        
+         PlayerStateMachine.AllowtoJump = true;
     }
 
     public override void ExitState()
@@ -23,10 +23,14 @@ public class PlayerGroundedState : PlayerBaseState
 
     public override void InitializeSubStates()
     {
-        // if(PlayerStateMachine.IsWalkingLeft || PlayerStateMachine.IsWalkingRight)
-        //     SetSubState(Factory.Walk());
-        // else if(!PlayerStateMachine.IsWalkingLeft || !PlayerStateMachine.IsWalkingRight)
-        //     SetSubState(Factory.Idle());
+        if(PlayerStateMachine.IsWalkingLeft || PlayerStateMachine.IsWalkingRight)
+            SetSubState(Factory.Walk());
+        else if(!PlayerStateMachine.IsWalkingLeft || !PlayerStateMachine.IsWalkingRight)
+            SetSubState(Factory.Idle());
+         else if(PlayerStateMachine.IsJumping && PlayerStateMachine.IsGrounded)
+        {
+            SwitchStates(Factory.Jump());
+        }
     }
 
     public override void UpdateState()
@@ -36,13 +40,13 @@ public class PlayerGroundedState : PlayerBaseState
     public override void CheckSwitchStates()
     {
         
-        if(PlayerStateMachine.IsJumping && PlayerStateMachine.IsGrounded)
+        if(!PlayerStateMachine.IsGrounded)
         {
-            SwitchStates(Factory.Jump());
+            SwitchStates(Factory.Fall());
         }
-        if(PlayerStateMachine.IsWalkingLeft || PlayerStateMachine.IsWalkingRight)
-            SwitchStates(Factory.Walk());
-        else if(!PlayerStateMachine.IsWalkingLeft || !PlayerStateMachine.IsWalkingRight)
-            SwitchStates(Factory.Idle());
+        // if(PlayerStateMachine.IsWalkingLeft || PlayerStateMachine.IsWalkingRight)
+        //     SwitchStates(Factory.Walk());
+        // else if(!PlayerStateMachine.IsWalkingLeft || !PlayerStateMachine.IsWalkingRight)
+        //     SwitchStates(Factory.Idle());
     }
 }

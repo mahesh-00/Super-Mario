@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using TMPro;
 using System;
 
@@ -8,9 +9,14 @@ public class GameScreen : CanvasView
 {
     [SerializeField]private TextMeshProUGUI _livesRemainingText;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         UIManager.Instance.OnLivesUpdated+= UpdateLivesRemainingUI;
+    }
+
+    void OnDisable()
+    {
+        UIManager.Instance.OnLivesUpdated-= UpdateLivesRemainingUI;
     }
 
     private void UpdateLivesRemainingUI(int obj)
@@ -18,9 +24,4 @@ public class GameScreen : CanvasView
         _livesRemainingText.text = "Lives : "+ obj;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

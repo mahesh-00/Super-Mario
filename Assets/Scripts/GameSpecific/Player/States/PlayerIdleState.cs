@@ -14,7 +14,7 @@ public class PlayerIdleState : PlayerBaseState
     {
         if (PlayerStateMachine.IsWalkingLeft || PlayerStateMachine.IsWalkingRight)
             SwitchStates(Factory.Walk());
-        if (PlayerStateMachine.IsJumping && PlayerStateMachine.IsGrounded)
+         if(PlayerStateMachine.IsJumping && PlayerStateMachine.IsGrounded)
         {
             SwitchStates(Factory.Jump());
         }

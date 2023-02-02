@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateFactory : MonoBehaviour
+public class PlayerStateFactory 
 {
    PlayerStateMachine _playerStateMachine;
 
@@ -29,5 +29,15 @@ public class PlayerStateFactory : MonoBehaviour
    public PlayerBaseState Grounded()
    {
         return new PlayerGroundedState (this, _playerStateMachine);
+   }
+
+   public PlayerBaseState Fall()
+   {
+     return new PlayerFallState(this,_playerStateMachine);
+   }
+
+   public PlayerBaseState Respawn()
+   {
+     return new PlayerRespawnState(this,_playerStateMachine);
    }
 }

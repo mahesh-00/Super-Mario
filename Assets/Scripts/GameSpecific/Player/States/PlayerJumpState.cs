@@ -6,17 +6,16 @@ public class PlayerJumpState : PlayerBaseState
 {
     public PlayerJumpState(PlayerStateFactory psf, PlayerStateMachine psm) : base(psf, psm)
     {
-        IsRootState = true;
-        InitializeSubStates();
+       
     }
 
     public override void CheckSwitchStates()
     {
-        if(!PlayerStateMachine.IsGrounded)
-        {
-           SwitchStates(Factory.Grounded());
-        }
-            
+       if(PlayerStateMachine.Rb.velocity.y < 0) //Player will move downwards
+       {
+            SwitchStates(Factory.Fall());
+       }
+
     }
 
     public override void EnterState()
@@ -26,10 +25,12 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void UpdateState()
     {
-        if(PlayerStateMachine.IsGrounded)
+        if(PlayerStateMachine.IsGrounded && PlayerStateMachine.AllowtoJump)
         {
-            float walkDirection = PlayerStateMachine.IsWalkingRight?5:PlayerStateMachine.IsWalkingLeft?-5:0;
-            PlayerStateMachine.Rb.AddForce( new Vector2(0f,20f), ForceMode2D.Impulse);
+            Debug.Log("jumping");
+            float walkDirection = PlayerStateMachine.IsWalkingRight?7:PlayerStateMachine.IsWalkingLeft?-7:0;
+            PlayerStateMachine.Rb.AddForce( new Vector2(walkDirection,PlayerStateMachine.JumpSpeed), ForceMode2D.Impulse);
+            PlayerStateMachine.AllowtoJump = false;
             //Debug.Log("jumping now....");
         }
         CheckSwitchStates();
