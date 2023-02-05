@@ -29,7 +29,7 @@ public abstract class PlayerBaseState
     {
         ExitState();
         Debug.Log(newState);
-        newState.EnterState();
+        newState.EnterStates();
         if(IsRootState)
         {
             PlayerStateMachine.CurrentState = newState;
@@ -43,11 +43,11 @@ public abstract class PlayerBaseState
          //newState.EnterStates();
          
     }
-    // void EnterStates()
-    // {
-    //     EnterState();
-    //     _currentSubState?.EnterStates();
-    // }
+    void EnterStates()
+    {
+        EnterState();
+        _currentSubState?.EnterStates();
+    }
     protected void SetSuperState(PlayerBaseState _newSuperState)
     {
         _currentSuperState = _newSuperState;

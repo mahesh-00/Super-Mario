@@ -25,7 +25,6 @@ public class PlayerFallState : PlayerBaseState
     public override void EnterState()
     {
        vecGravity = new Vector2(0,-Physics2D.gravity.y);
-       PlayerStateMachine.AllowtoJump = true;
     }
 
     public override void ExitState()

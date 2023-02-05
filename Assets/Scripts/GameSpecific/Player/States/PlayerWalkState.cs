@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class PlayerWalkState : PlayerBaseState
@@ -20,7 +21,18 @@ public class PlayerWalkState : PlayerBaseState
 
     public override void EnterState()
     {
-      
+        if (PlayerStateMachine.IsWalkingLeft)
+        {
+            PlayerStateMachine.OnEnterState(PlayerStateMachine.PlayerStates.LeftWalk);
+            PlayerStateMachine.transform.rotation = Quaternion.Euler(0,180,0);
+        }
+            
+        else
+        {
+             PlayerStateMachine.OnEnterState(PlayerStateMachine.PlayerStates.RightWalk);
+            PlayerStateMachine.transform.rotation = Quaternion.Euler(0,0,0);
+        }
+           
     }
 
     public override void ExitState()
@@ -52,6 +64,11 @@ public class PlayerWalkState : PlayerBaseState
             PlayerStateMachine.Rb.MovePosition(PlayerStateMachine.Rb.position + new Vector2(1, 0) * Time.fixedDeltaTime);
         }
 
+        // Vector3 screenPoint = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
+        // Vector3 newBounds = PlayerStateMachine._cinemachineVirtualCamera.GetComponent<CinemachineConfiner>().m.size;
+        
+        // newBounds.x = screenPoint.x - confiner.transform.position.x;
+        // confiner.m_Bounds.size = newBounds;
         CheckSwitchStates();
         // rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
     }

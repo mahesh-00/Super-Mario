@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Level Data
   m_EditorClassIdentifier: 
   _levelPrefabs:
-  - LevelPrefab: {fileID: 7548486746276484397, guid: 47878cfb3ecaa7d44b921b1c4a87ff91, type: 3}
-    BoundShape2D: {fileID: 5764524851435274013, guid: 05e1cc2c1224fc14182b49f493441116, type: 3}
+  - LevelPrefab: {fileID: 4953392140518545772, guid: 57271e1f591f9a54e9eae6f2c73c2560, type: 3}
+    BoundShape2D: {fileID: 3449369014948839760, guid: 4df381fa0802d054ab11cd30f337eb38, type: 3}
   _playerPrefab: {fileID: 4895386398382742470, guid: bc71f2cb7fc10ee45b1cf2b035f03d33, type: 3}

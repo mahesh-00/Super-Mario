@@ -20,14 +20,14 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void EnterState()
     {
-        
+        PlayerStateMachine.OnEnterState?.Invoke(PlayerStateMachine.PlayerStates.Jump);
     }
 
     public override void UpdateState()
     {
         if(PlayerStateMachine.IsGrounded && PlayerStateMachine.AllowtoJump)
         {
-            Debug.Log("jumping");
+         
             float walkDirection = PlayerStateMachine.IsWalkingRight?7:PlayerStateMachine.IsWalkingLeft?-7:0;
             PlayerStateMachine.Rb.AddForce( new Vector2(walkDirection,PlayerStateMachine.JumpSpeed), ForceMode2D.Impulse);
             PlayerStateMachine.AllowtoJump = false;

@@ -36,7 +36,8 @@ public class GameManager : MonoBehaviour
 
     }
     public Action OnCastleReached;
-    public Action OnEnemyCollision;
+    public Action OnPlayerKilled;
+    
     public Action<GameState> OnPlayAgain;
     public Action<GameState> OnGameStateChanged;
     public Action<bool> OnLeftWalk;

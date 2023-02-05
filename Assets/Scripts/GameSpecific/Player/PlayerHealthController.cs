@@ -3,18 +3,18 @@ using UnityEngine;
 public class PlayerHealthController : MonoBehaviour
 {
     private PlayerStateMachine _playerStateMachine;
-    private int _noOfLives = 3;
+    private int _noOfLives = 1;
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.OnEnemyCollision+=OnEnemyCollision;
+        GameManager.Instance.OnPlayerKilled+=OnEnemyCollision;
         _playerStateMachine = GetComponent<PlayerStateMachine>();
         UIManager.Instance.OnLivesUpdated?.Invoke(_noOfLives);
     }
 
     void OnDisable()
     {
-         GameManager.Instance.OnEnemyCollision-=OnEnemyCollision;
+         GameManager.Instance.OnPlayerKilled-=OnEnemyCollision;
     }
 
     private void OnEnemyCollision()

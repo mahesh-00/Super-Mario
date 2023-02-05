@@ -26,7 +26,9 @@ public class PlayerPhysicsController : MonoBehaviour
             _playerStateMachine.IsGrounded = true;
            
         if(collision.gameObject.CompareTag(CONSTANTS.CASTLE))
-            GameManager.Instance.OnCastleReached?.Invoke();     
+            GameManager.Instance.OnCastleReached?.Invoke();
+        if(collision.gameObject.CompareTag(CONSTANTS.FALLTRIGGER))
+            GameManager.Instance.OnPlayerKilled?.Invoke();     
         
    }
 
@@ -45,17 +47,12 @@ public class PlayerPhysicsController : MonoBehaviour
          if(collision.gameObject.CompareTag(CONSTANTS.ENEMY))
          {
             Vector2 offset = new Vector2(transform.position.x,transform.position.y - 0.64f);
-            Debug.Log(offset.y + "enemy pos: "+ collision.transform.position.y);
-            if(offset.y > collision.transform.position.y)
+            if(offset.y > collision.transform.position.y) //player has killed enemy
             {
-                Debug.Log("enemy killed");
-                collision.gameObject.SetActive(false);
+                collision.gameObject.GetComponent<EnemyController>().OnEnemyKilled?.Invoke();
             }
             else
-                GameManager.Instance.OnEnemyCollision?.Invoke();
+                GameManager.Instance.OnPlayerKilled?.Invoke(); //enemy has killed player
          }
-           
-        
-        
     }
 }
