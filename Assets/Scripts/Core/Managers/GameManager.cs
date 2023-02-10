@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => _instance;
     #endregion
 
-   [SerializeField] private LevelData _levelData;
-   [SerializeField] private PlayerData _playerData;
+   [SerializeField] public LevelData LevelData;
+
    [SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
     private GameObject _player;
     private GameObject _currentLevel;
@@ -36,14 +36,15 @@ public class GameManager : MonoBehaviour
 
     }
     public Action OnCastleReached;
-    public Action OnPlayerKilled;
-    
     public Action<GameState> OnPlayAgain;
     public Action<GameState> OnGameStateChanged;
     public Action<bool> OnLeftWalk;
     public Action<bool> OnRightWalk;
     public Action<bool> OnJump;
+    public Action OnPlayerKilled;
     public Action OnPlayerDead;
+    public Action OnGameCompleted;
+    public Action OnCoinCollected;
     public enum GameState
     {
         StartMenuState,
@@ -65,13 +66,13 @@ public class GameManager : MonoBehaviour
     {
         ChangeState(GameState.StartMenuState);
         OnCastleReached+= () => ChangeState(GameState.GameCompleteState);
-        OnPlayerDead+= () => ChangeState(GameState.GameCompleteState);
+        OnGameCompleted+= () => ChangeState(GameState.GameCompleteState);
     }
 
     void Disable()
     {
-         OnCastleReached-= () => ChangeState(GameState.GameCompleteState);
-        OnPlayerDead-= () => ChangeState(GameState.GameCompleteState);
+        OnCastleReached-= () => ChangeState(GameState.GameCompleteState);
+        OnGameCompleted-= () => ChangeState(GameState.GameCompleteState);
     }
 
     public void ChangeState(GameState newState)
@@ -97,11 +98,11 @@ public class GameManager : MonoBehaviour
 
     private void HandleGameplayState()
     {
-       _currentLevel = Instantiate(_levelData.LevelPrefabs[0].LevelPrefab);
-       _player = Instantiate(_levelData.PlayerPrefab);
+       _currentLevel = Instantiate(LevelData.LevelPrefabs[0].LevelPrefab);
+       _player = Instantiate(LevelData.PlayerPrefab);
        _cinemachineVirtualCamera.Follow = _player.transform;
        _cinemachineVirtualCamera.LookAt =_player.transform;
-       _cinemachineVirtualCamera.transform.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = _levelData.LevelPrefabs[0].BoundShape2D;
+       _cinemachineVirtualCamera.transform.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = LevelData.LevelPrefabs[0].BoundShape2D;
       
     }
     private void HandleLevelCompleteState()

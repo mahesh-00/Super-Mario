@@ -36,8 +36,8 @@ public class PlayerStateFactory
      return new PlayerFallState(this,_playerStateMachine);
    }
 
-   public PlayerBaseState Respawn()
+   public PlayerBaseState Dead()
    {
-     return new PlayerRespawnState(this,_playerStateMachine);
+     return new PlayerDeadState(this,_playerStateMachine);
    }
 }

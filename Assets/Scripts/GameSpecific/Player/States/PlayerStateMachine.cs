@@ -22,6 +22,8 @@ public class PlayerStateMachine : MonoBehaviour
     private bool _isJumping;
     public bool IsJumping => _isJumping;
     public bool AllowtoJump;
+    private bool _isAlive;
+    public bool IsAlive => _isAlive;
     private CharacterInputAction _characterInputMap;
     [SerializeField] private PlayerData PlayerData;
     public float WalkSpeed;
@@ -33,10 +35,11 @@ public class PlayerStateMachine : MonoBehaviour
      Idle,
      LeftWalk,
      RightWalk,
-     Jump 
+     Jump,
+     Dead 
    }
     public Action<PlayerStates> OnEnterState;
-    public CinemachineVirtualCamera _cinemachineVirtualCamera;
+    //public CinemachineVirtualCamera _cinemachineVirtualCamera;
 
     // Start is called before the first frame update
     void Start()
@@ -45,9 +48,10 @@ public class PlayerStateMachine : MonoBehaviour
         _characterInputMap = new CharacterInputAction();
         _characterInputMap.Enable();
         _rb = GetComponent<Rigidbody2D>();
-        _cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+       // _cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         WalkSpeed = PlayerData.WalkSpeed;
         JumpSpeed = PlayerData.jumpSpeed;
+        _isAlive = true;
         _characterInputMap.Movement.WalkLeft.performed += (InputAction.CallbackContext obj) =>
         {
             _isWalkingLeft = true;
@@ -66,7 +70,7 @@ public class PlayerStateMachine : MonoBehaviour
         _currentState = _playerStateFactory.Grounded();
         _currentState.EnterState();
 
-        GameManager.Instance.OnPlayerKilled += RespawnPlayer;
+        GameManager.Instance.OnPlayerKilled += ChangePlayerState;
         GameManager.Instance.OnLeftWalk += (bool _isWalking) => _isWalkingLeft = _isWalking;
         GameManager.Instance.OnRightWalk += (bool _isWalking) => _isWalkingRight = _isWalking;
         GameManager.Instance.OnJump += (bool _isJumpPressed) => _isJumping = _isJumpPressed;
@@ -79,7 +83,7 @@ public class PlayerStateMachine : MonoBehaviour
         _characterInputMap.Movement.WalkRight.canceled -= (InputAction.CallbackContext obj) => _isWalkingRight = false;
         _characterInputMap.Movement.Jump.performed -= (InputAction.CallbackContext obj) => _isJumping = true;
         _characterInputMap.Movement.Jump.canceled -= (InputAction.CallbackContext obj) => _isJumping = false;
-        GameManager.Instance.OnPlayerKilled -= RespawnPlayer;
+        GameManager.Instance.OnPlayerKilled -= ChangePlayerState;
         GameManager.Instance.OnLeftWalk -= (bool _isWalking) => _isWalkingLeft = _isWalking;
         GameManager.Instance.OnRightWalk -= (bool _isWalking) => _isWalkingRight = _isWalking;
         GameManager.Instance.OnJump -= (bool _isJumpPressed) => _isJumping = _isJumpPressed;
@@ -93,9 +97,10 @@ public class PlayerStateMachine : MonoBehaviour
         _currentState.UpdateStates();
     }
 
-    private void RespawnPlayer()
+    private void ChangePlayerState()
     {
-        transform.position = CheckPoint.LastCheckPointPos;
+        _isAlive = false;
+       _currentState.SwitchStates(_playerStateFactory.Dead());
     }
 
 }

@@ -7,7 +7,7 @@ public class PlayerAnimationController : MonoBehaviour
 {
     private PlayerStateMachine _playerStateMachine;
     [SerializeField] private Animator _playerAnimator;
-    private int _idle, _walk, _jump;
+    private int _idle, _walk, _jump,_dead;
 
     void Awake()
     {
@@ -39,6 +39,9 @@ public class PlayerAnimationController : MonoBehaviour
                 break;
             case PlayerStateMachine.PlayerStates.Jump:
                 PlayAnimation(_jump);
+                break;
+            case PlayerStateMachine.PlayerStates.Dead:
+                PlayAnimation(_idle);
                 break;
              default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);

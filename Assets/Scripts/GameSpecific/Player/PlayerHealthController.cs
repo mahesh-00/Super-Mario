@@ -14,7 +14,7 @@ public class PlayerHealthController : MonoBehaviour
 
     void OnDisable()
     {
-         GameManager.Instance.OnPlayerKilled-=OnEnemyCollision;
+        GameManager.Instance.OnPlayerKilled-=OnEnemyCollision;
     }
 
     private void OnEnemyCollision()

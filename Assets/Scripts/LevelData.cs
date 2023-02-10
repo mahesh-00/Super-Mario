@@ -7,9 +7,11 @@ public class LevelData : ScriptableObject
 {
     [SerializeField] private List<MapData> _levelPrefabs;
     [SerializeField] private GameObject _playerPrefab;
+    [SerializeField] private GameObject _coin;
 
     [HideInInspector] public List<MapData> LevelPrefabs => _levelPrefabs;
     [HideInInspector] public GameObject PlayerPrefab => _playerPrefab;
+    [HideInInspector] public GameObject Coin => _coin;
 
     [Serializable]
     public struct MapData
