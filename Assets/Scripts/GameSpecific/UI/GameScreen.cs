@@ -19,7 +19,7 @@ public class GameScreen : CanvasView
     void OnDisable()
     {
         UIManager.Instance.OnLivesUpdated-= UpdateLivesRemainingUI;
-        ItemsHandler.OnCoinsUpdated += UpdateCoinsCollected;
+        ItemsHandler.OnCoinsUpdated -= UpdateCoinsCollected;
     }
 
     private void UpdateLivesRemainingUI(int obj)

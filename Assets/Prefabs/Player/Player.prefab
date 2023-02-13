@@ -49,13 +49,12 @@ GameObject:
   - component: {fileID: 4895386398382742524}
   - component: {fileID: 4895386398382742521}
   - component: {fileID: 4895386398382742525}
-  - component: {fileID: 4895386398382742513}
   - component: {fileID: 4895386398382742526}
   - component: {fileID: 4895386398382742527}
   - component: {fileID: 4895386398382742512}
   - component: {fileID: 4895386398382742515}
   - component: {fileID: 4893030214158572565}
-  - component: {fileID: 1932770473416966141}
+  - component: {fileID: 6479407969454091879}
   m_Layer: 5
   m_Name: Player
   m_TagString: Player
@@ -185,32 +184,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &4895386398382742513
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4895386398382742470}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -1.0479681}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2}
-    newSize: {x: 1, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.093028545}
-  m_EdgeRadius: 0
 --- !u!114 &4895386398382742526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,8 +255,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerAnimator: {fileID: 4895386398382742524}
---- !u!70 &1932770473416966141
-CapsuleCollider2D:
+--- !u!61 &6479407969454091879
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -296,5 +269,15 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 2}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 1, y: 2}
-  m_Direction: 0
+  m_EdgeRadius: 0

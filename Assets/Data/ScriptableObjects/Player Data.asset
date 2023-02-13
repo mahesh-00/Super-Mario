@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Player Data
   m_EditorClassIdentifier: 
   _walkSpeed: 5
-  _jumpSpeed: 25
+  _jumpSpeed: 27

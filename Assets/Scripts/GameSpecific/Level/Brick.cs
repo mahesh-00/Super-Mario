@@ -20,17 +20,16 @@ public class Brick : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-       if(collision.gameObject.CompareTag(CONSTANTS.PLAYER) && !_isBrickHit)
-       {
-         if(collision.transform.position.y < transform.position.y)
-         {
-            OnBrickHit();
-            Instantiate(GameManager.Instance.LevelData.Coin,transform.position + new Vector3(0,1.3f,0),Quaternion.identity);
-            _isBrickHit = true;
-           
-         }
-         
-       }
+        if (collision.gameObject.CompareTag(CONSTANTS.PLAYER) && !_isBrickHit)
+        {
+            if (collision.transform.position.y < transform.position.y)
+            {
+                OnBrickHit();
+                _isBrickHit = true;
+
+            }
+
+        }
     }
 
     private void OnBrickHit()
@@ -41,11 +40,11 @@ public class Brick : MonoBehaviour
                 Debug.Log("solid");
                 break;
             case BrickState.breakable:
+                Instantiate(GameManager.Instance.LevelData.Coin, transform.position + new Vector3(0, 1.3f, 0), Quaternion.identity);
                 Debug.Log("breakable");
                 break;
-                
+
         }
     }
-
 
 }

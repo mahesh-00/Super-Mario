@@ -18,10 +18,10 @@ public class PlayerPhysicsController : MonoBehaviour
     void FixedUpdate()
     {
         RaycastHit2D hitGroundMiddle = Physics2D.Raycast(_groundRayTF.position, Vector2.down,0.2f,_groundMask);
-        RaycastHit2D hitGroundLeft = Physics2D.Raycast(_groundRayTF.position - new Vector3(0.3f,0,0), Vector2.down,1f,_groundMask);
-        RaycastHit2D hitGroundRight = Physics2D.Raycast(_groundRayTF.position + new Vector3(0.3f,0,0), Vector2.down,1f,_groundMask);
-        Debug.DrawRay(_groundRayTF.position,Vector2.down * hitGroundLeft.distance,Color.red);
-        Debug.DrawRay(_groundRayTF.position,Vector2.down * hitGroundRight.distance,Color.red);
+        RaycastHit2D hitGroundLeft = Physics2D.Raycast(_groundRayTF.position - new Vector3(0.5f,0,0), Vector2.down,0.2f,_groundMask);
+        RaycastHit2D hitGroundRight = Physics2D.Raycast(_groundRayTF.position + new Vector3(0.5f,0,0), Vector2.down,0.2f,_groundMask);
+        Debug.DrawRay(_groundRayTF.position - new Vector3(0.5f,0,0),Vector2.down * hitGroundLeft.distance,Color.red);
+        Debug.DrawRay(_groundRayTF.position + new Vector3(0.5f,0,0),Vector2.down * hitGroundRight.distance,Color.red);
         if(hitGroundMiddle.collider !=  null || hitGroundLeft.collider != null || hitGroundRight.collider != null)
             _playerStateMachine.IsGrounded = true;
         else
@@ -44,9 +44,6 @@ public class PlayerPhysicsController : MonoBehaviour
 
         if (collision.gameObject.CompareTag(CONSTANTS.FALLTRIGGER) && _playerStateMachine.IsAlive)
             GameManager.Instance.OnPlayerKilled?.Invoke();
-      
-      
-
     }
 
     void OnTriggerExit2D(Collider2D collision)

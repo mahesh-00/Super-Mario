@@ -19,14 +19,14 @@ public class PlayerDeadState : PlayerBaseState
     {
       if(!_isFalling)
       {
-          PlayerStateMachine.Rb.MovePosition(PlayerStateMachine.Rb.position + new Vector2(0,3) * Time.fixedDeltaTime);
+          PlayerStateMachine.Rb.MovePosition(PlayerStateMachine.Rb.position + new Vector2(0,3) * 2 * Time.fixedDeltaTime);
           //Debug.Log("jumping");
       }
         
       if(PlayerStateMachine.Rb.position.y > 2.5f)
       {
          //Debug.Log("jump limit reached");
-         PlayerStateMachine.GetComponent<CapsuleCollider2D>().isTrigger = true; 
+         PlayerStateMachine.GetComponent<BoxCollider2D>().isTrigger = true; 
          _isFalling = true;
       }
     

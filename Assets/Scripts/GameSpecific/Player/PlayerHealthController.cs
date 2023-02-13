@@ -25,6 +25,5 @@ public class PlayerHealthController : MonoBehaviour
         {
             GameManager.Instance.OnPlayerDead?.Invoke();
         }
-        Debug.Log(CheckPoint.LastCheckPointPos);
     }
 }
