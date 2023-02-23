@@ -25,13 +25,13 @@ public class EnemyController : MonoBehaviour
 
     void OnEnable()
     {
-        OnEnemyKilled+= KillEnemy;
+        OnEnemyKilled += KillEnemy;
     }
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-       _enemyAnimator = GetComponent<Animator>();
+        _enemyAnimator = GetComponent<Animator>();
         //Fall();
     }
 
@@ -39,23 +39,23 @@ public class EnemyController : MonoBehaviour
     void FixedUpdate()
     {
         UpdateEnemyPosition();
-       
+
         // Cast a ray downward from the enemy's position
-        RaycastHit2D hitGroundLeft = Physics2D.Raycast(_groundRayTF.position - new Vector3(1,0,0), Vector2.down);
-        RaycastHit2D hitGroundRight = Physics2D.Raycast(_groundRayTF.position + new Vector3(1,0,0), -Vector2.up);
-        Debug.DrawRay(_groundRayTF.position - new Vector3(1,0,0),-Vector2.up * hitGroundLeft.distance);
-       
-        if(hitGroundLeft.collider == null)
-            _isWalkingLeft = _isWalkingLeft?false:true;
-        
-        if(hitGroundRight.collider == null)
-            _isWalkingLeft = _isWalkingLeft?false:true;
+        RaycastHit2D hitGroundLeft = Physics2D.Raycast(_groundRayTF.position - new Vector3(1, 0, 0), Vector2.down);
+        RaycastHit2D hitGroundRight = Physics2D.Raycast(_groundRayTF.position + new Vector3(1, 0, 0), -Vector2.up);
+        Debug.DrawRay(_groundRayTF.position - new Vector3(1, 0, 0), -Vector2.up * hitGroundLeft.distance);
+
+        if (hitGroundLeft.collider == null)
+            _isWalkingLeft = _isWalkingLeft ? false : true;
+
+        if (hitGroundRight.collider == null)
+            _isWalkingLeft = _isWalkingLeft ? false : true;
 
     }
 
     void OnDisable()
     {
-        OnEnemyKilled-= KillEnemy;
+        OnEnemyKilled -= KillEnemy;
     }
 
     // private Vector3 CheckGround(Vector3 pos)
@@ -76,41 +76,41 @@ public class EnemyController : MonoBehaviour
     //         return pos;
     //     }
     //     return Vector3.zero;
-         
+
     // }
 
     private void UpdateEnemyPosition()
-     {
-   
-            Vector3 pos = transform.localPosition;
-            Vector3 scale = transform.localScale;
+    {
 
-            // if(state == EnemyState.falling)
-            // {
-            //     pos.y += _velocity.y * Time.deltaTime;
-            //     _velocity.y -= _gravity * Time.deltaTime;
-            // }
+        Vector3 pos = transform.localPosition;
+        Vector3 scale = transform.localScale;
 
-            if(state == EnemyState.walking)
+        // if(state == EnemyState.falling)
+        // {
+        //     pos.y += _velocity.y * Time.deltaTime;
+        //     _velocity.y -= _gravity * Time.deltaTime;
+        // }
+
+        if (state == EnemyState.walking)
+        {
+            if (_isWalkingLeft)
             {
-                if(_isWalkingLeft)
-                {
-                    //_rb.MovePosition(_rb.position + new Vector2(3,0) * Time.fixedDeltaTime);
-                    pos.x -= _velocity.x * Time.deltaTime;
-                    scale.x = -1;
-                }
-                else
-                {
-                    //_rb.MovePosition(_rb.position + new Vector2(-3,0) * Time.fixedDeltaTime);
-                    pos.x += _velocity.x * Time.deltaTime;
-                    scale.x = 1;
-                }
+                //_rb.MovePosition(_rb.position + new Vector2(3,0) * Time.fixedDeltaTime);
+                pos.x -= _velocity.x * Time.deltaTime;
+                scale.x = -1;
             }
-            transform.localPosition = pos;
-            transform.localScale = scale;
+            else
+            {
+                //_rb.MovePosition(_rb.position + new Vector2(-3,0) * Time.fixedDeltaTime);
+                pos.x += _velocity.x * Time.deltaTime;
+                scale.x = 1;
+            }
+        }
+        transform.localPosition = pos;
+        transform.localScale = scale;
     }
 
-   
+
 
     // void Fall()
     // {
@@ -121,36 +121,36 @@ public class EnemyController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-       // Debug.Log("Entered collision "+collision.gameObject.name);
-        _isWalkingLeft = _isWalkingLeft?false:true;
-        if(collision.gameObject.CompareTag(CONSTANTS.GROUND))
+        // Debug.Log("Entered collision "+collision.gameObject.name);
+        _isWalkingLeft = _isWalkingLeft ? false : true;
+        if (collision.gameObject.CompareTag(CONSTANTS.GROUND))
         {
             _isGrounded = true;
 
         }
-            
+
     }
 
     void OnCollisionExit2D(Collision2D collision)
     {
         //Debug.Log(collision.gameObject.name);
-        if(collision.gameObject.CompareTag(CONSTANTS.GROUND))
+        if (collision.gameObject.CompareTag(CONSTANTS.GROUND))
         {
             _isGrounded = false;
-            _isWalkingLeft = _isWalkingLeft?false:true;
+            _isWalkingLeft = _isWalkingLeft ? false : true;
         }
-            
+
     }
-     void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerExit2D(Collider2D collision)
     {
-      
+
     }
 
     private void KillEnemy()
     {
         state = EnemyState.dead;
-       _enemyAnimator.SetBool("isCrushed",true);
-       StartCoroutine(WaitForEnemyToDie());
+        _enemyAnimator.SetBool("isCrushed", true);
+        StartCoroutine(WaitForEnemyToDie());
 
     }
 

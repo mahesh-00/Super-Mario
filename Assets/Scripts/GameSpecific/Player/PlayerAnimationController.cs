@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class PlayerAnimationController : MonoBehaviour
 {
     private PlayerStateMachine _playerStateMachine;
     [SerializeField] private Animator _playerAnimator;
+    
+    [SerializeField]private GameObject _flagGO;
     private int _idle, _walk, _jump,_dead;
 
     void Awake()
@@ -60,4 +62,5 @@ public class PlayerAnimationController : MonoBehaviour
         _playerAnimator.SetBool(_walk,false);
         _playerAnimator.SetBool(_jump,false);
     }
+
 }

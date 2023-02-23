@@ -21,21 +21,10 @@ public class GameManager : MonoBehaviour
    [SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
     private GameObject _player;
     private GameObject _currentLevel;
-    private bool _isGameStarted = false;
-    public bool IsGameStarted
-    {
-        get { return _isGameStarted; }
-        set
-        {
-            _isGameStarted = value;
-            if (value)
-            {
-                ChangeState(GameState.GamePlayState);
-            }
-        }
-
-    }
+  
+    public Action OnGameStarted;
     public Action OnCastleReached;
+    public Action OnWinPointReached;
     public Action<GameState> OnPlayAgain;
     public Action<GameState> OnGameStateChanged;
     public Action<bool> OnLeftWalk;
@@ -65,14 +54,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         ChangeState(GameState.StartMenuState);
-        OnCastleReached+= () => ChangeState(GameState.GameCompleteState);
+        OnGameStarted += () => ChangeState(GameState.GamePlayState);
         OnGameCompleted+= () => ChangeState(GameState.GameCompleteState);
     }
 
     void Disable()
     {
-        OnCastleReached-= () => ChangeState(GameState.GameCompleteState);
         OnGameCompleted-= () => ChangeState(GameState.GameCompleteState);
+        OnGameStarted -= () => ChangeState(GameState.GamePlayState);
     }
 
     public void ChangeState(GameState newState)

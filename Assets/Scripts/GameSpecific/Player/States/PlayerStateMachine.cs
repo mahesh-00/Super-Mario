@@ -74,8 +74,12 @@ public class PlayerStateMachine : MonoBehaviour
         GameManager.Instance.OnLeftWalk += (bool _isWalking) => _isWalkingLeft = _isWalking;
         GameManager.Instance.OnRightWalk += (bool _isWalking) => _isWalkingRight = _isWalking;
         GameManager.Instance.OnJump += (bool _isJumpPressed) => _isJumping = _isJumpPressed;
+        GameManager.Instance.OnCastleReached += ChangeToWalkState;
+        GameManager.Instance.OnWinPointReached += () => _characterInputMap.Disable();
 
     }
+
+   
 
     void OnDisable()
     {
@@ -87,6 +91,8 @@ public class PlayerStateMachine : MonoBehaviour
         GameManager.Instance.OnLeftWalk -= (bool _isWalking) => _isWalkingLeft = _isWalking;
         GameManager.Instance.OnRightWalk -= (bool _isWalking) => _isWalkingRight = _isWalking;
         GameManager.Instance.OnJump -= (bool _isJumpPressed) => _isJumping = _isJumpPressed;
+        GameManager.Instance.OnCastleReached -= ChangeToWalkState;
+        GameManager.Instance.OnWinPointReached -= () => _characterInputMap.Disable();
     }
 
 
@@ -101,6 +107,19 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _isAlive = false;
        _currentState.SwitchStates(_playerStateFactory.Dead());
+    }
+
+    private void ChangeToWalkState()
+    {
+        _currentState.SwitchStates(_playerStateFactory.Walk());
+        _isWalkingRight = true;
+        StartCoroutine(WaiforWinAnimation());
+    }
+
+    IEnumerator WaiforWinAnimation()
+    {
+        yield return new WaitForSeconds(1.5f);
+        GameManager.Instance.OnGameCompleted?.Invoke();
     }
 
 }

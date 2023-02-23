@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4895386398382742515}
   - component: {fileID: 4893030214158572565}
   - component: {fileID: 6479407969454091879}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ RectTransform:
   m_GameObject: {fileID: 4895386398382742470}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4587577017929756700}
@@ -180,7 +180,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 5
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -255,6 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerAnimator: {fileID: 4895386398382742524}
+  _flagGO: {fileID: 0}
 --- !u!61 &6479407969454091879
 BoxCollider2D:
   m_ObjectHideFlags: 0

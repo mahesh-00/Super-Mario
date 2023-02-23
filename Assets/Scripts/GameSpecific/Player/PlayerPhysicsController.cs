@@ -15,7 +15,7 @@ public class PlayerPhysicsController : MonoBehaviour
         //GameManager.Instance.OnWalking+= CheckForLeftEdge;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         RaycastHit2D hitGroundMiddle = Physics2D.Raycast(_groundRayTF.position, Vector2.down,0.2f,_groundMask);
         RaycastHit2D hitGroundLeft = Physics2D.Raycast(_groundRayTF.position - new Vector3(0.5f,0,0), Vector2.down,0.2f,_groundMask);
@@ -39,8 +39,8 @@ public class PlayerPhysicsController : MonoBehaviour
         // }
            
 
-        if (collision.gameObject.CompareTag(CONSTANTS.CASTLE))
-            GameManager.Instance.OnCastleReached?.Invoke();
+        if (collision.gameObject.CompareTag(CONSTANTS.WINPOINT))
+            GameManager.Instance.OnWinPointReached?.Invoke();
 
         if (collision.gameObject.CompareTag(CONSTANTS.FALLTRIGGER) && _playerStateMachine.IsAlive)
             GameManager.Instance.OnPlayerKilled?.Invoke();
@@ -63,6 +63,7 @@ public class PlayerPhysicsController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(CONSTANTS.ENEMY))
         {
+            //Debug.Log("owwww enemy....");
             Vector2 offset = new Vector2(transform.position.x, transform.position.y - 0.64f);
             if (offset.y < collision.transform.position.y && _playerStateMachine.IsAlive)  //enemy has killed player
             {
@@ -71,6 +72,7 @@ public class PlayerPhysicsController : MonoBehaviour
             else //player has killed enemy
 
                 collision.gameObject.GetComponent<EnemyController>().OnEnemyKilled?.Invoke();
+                AudioManager.Instance.OnEnemyKilled?.Invoke();
         }
          
       

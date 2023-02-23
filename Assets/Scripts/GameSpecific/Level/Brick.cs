@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,12 +8,14 @@ public class Brick : MonoBehaviour
     private bool _isBrickHit = false;
     private Animator _blockAnimator;
     [SerializeField] private bool _hasCoins;
+    [SerializeField] private ParticleSystem _breakBrickVFX;
     public enum BrickState
     {
         solid,
         breakable
     }
     public BrickState brickState;
+ 
 
     void Start()
     {
@@ -24,15 +27,14 @@ public class Brick : MonoBehaviour
         {
             if (collision.transform.position.y < transform.position.y)
             {
-                OnBrickHit();
+                HandleBrickHit();
                 _isBrickHit = true;
-
             }
 
         }
     }
 
-    private void OnBrickHit()
+    private void HandleBrickHit()
     {
         switch (brickState)
         {
@@ -41,6 +43,10 @@ public class Brick : MonoBehaviour
                 break;
             case BrickState.breakable:
                 Instantiate(GameManager.Instance.LevelData.Coin, transform.position + new Vector3(0, 1.3f, 0), Quaternion.identity);
+                AudioManager.Instance.OnBrickHit?.Invoke();
+                GameObject vfx = Instantiate(_breakBrickVFX.gameObject,transform.position,Quaternion.identity);
+                Destroy(vfx,1);
+                Destroy(this.gameObject);
                 Debug.Log("breakable");
                 break;
 

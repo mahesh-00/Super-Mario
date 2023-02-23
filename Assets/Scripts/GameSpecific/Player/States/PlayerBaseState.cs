@@ -28,7 +28,7 @@ public abstract class PlayerBaseState
     public void SwitchStates(PlayerBaseState newState)
     {
         ExitState();
-        Debug.Log(newState);
+        //Debug.Log(newState);
         newState.EnterStates();
         if(IsRootState)
         {

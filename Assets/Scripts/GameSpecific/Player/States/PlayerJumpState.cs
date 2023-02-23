@@ -28,7 +28,7 @@ public class PlayerJumpState : PlayerBaseState
         if(PlayerStateMachine.IsGrounded && PlayerStateMachine.AllowtoJump)
         {
          
-            float walkDirection = PlayerStateMachine.IsWalkingRight?7:PlayerStateMachine.IsWalkingLeft?-7:0;
+            float walkDirection = PlayerStateMachine.IsWalkingRight?PlayerStateMachine.WalkSpeed:PlayerStateMachine.IsWalkingLeft?-PlayerStateMachine.WalkSpeed:0;
             PlayerStateMachine.Rb.AddForce( new Vector2(walkDirection,PlayerStateMachine.JumpSpeed), ForceMode2D.Impulse);
             PlayerStateMachine.AllowtoJump = false;
             //Debug.Log("jumping now....");
