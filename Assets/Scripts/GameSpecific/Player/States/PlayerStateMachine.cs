@@ -119,6 +119,9 @@ public class PlayerStateMachine : MonoBehaviour
     IEnumerator WaiforWinAnimation()
     {
         yield return new WaitForSeconds(1.5f);
+        _isWalkingRight = false;
+         //_currentState.SwitchStates(_playerStateFactory.Idle());
+        yield return new WaitForSeconds(3f);
         GameManager.Instance.OnGameCompleted?.Invoke();
     }
 

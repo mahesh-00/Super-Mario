@@ -24,7 +24,7 @@ public class PlayerIdleState : PlayerBaseState
     {
         PlayerStateMachine.OnEnterState?.Invoke(PlayerStateMachine.PlayerStates.Idle);
         //PlayerStateMachine.Rb.velocity = Vector3.SmoothDamp( PlayerStateMachine.Rb.velocity, new Vector3(0f,  PlayerStateMachine.Rb.velocity.y, 0f), ref _currentVelocity, 0.4f * Time.fixedDeltaTime);
-        //PlayerStateMachine.Rb.velocity = new Vector2(0,0);   
+        PlayerStateMachine.Rb.velocity = new Vector2(0,0);   
     }
 
     public override void ExitState()

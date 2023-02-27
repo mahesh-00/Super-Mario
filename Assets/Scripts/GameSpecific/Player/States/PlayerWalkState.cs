@@ -53,16 +53,16 @@ public class PlayerWalkState : PlayerBaseState
         // Convert the object's position to viewport space using the main camera
         Vector3 objectPosViewport = Camera.main.WorldToViewportPoint(objectPosWorld);
         // Check if the object is inside of the screen
-        if (objectPosViewport.x >= 0.02)
-        {
+        // if (objectPosViewport.x >= 0.02)
+        // {
             PlayerStateMachine.Rb.MovePosition(PlayerStateMachine.Rb.position + walkDirection * Time.fixedDeltaTime);
             //Debug.Log("Object is inside of screen space!");
-        }
+        //}
 
-        else
-        {
-            PlayerStateMachine.Rb.MovePosition(PlayerStateMachine.Rb.position + new Vector2(1, 0) * Time.fixedDeltaTime);
-        }
+        // else
+        // {
+        //     PlayerStateMachine.Rb.MovePosition(PlayerStateMachine.Rb.position + new Vector2(1, 0) * Time.fixedDeltaTime);
+        // }
 
         // Vector3 screenPoint = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
         // Vector3 newBounds = PlayerStateMachine._cinemachineVirtualCamera.GetComponent<CinemachineConfiner>().m.size;

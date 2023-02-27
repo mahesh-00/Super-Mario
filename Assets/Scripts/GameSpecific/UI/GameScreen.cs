@@ -27,7 +27,7 @@ public class GameScreen : CanvasView
 
     private void UpdateCoinsCollected(int _totalCoins)
     {
-        _coinsCollectedText.text =  "Coins: " + _totalCoins.ToString();
+        _coinsCollectedText.text =  "COINS: " + _totalCoins.ToString();
     }
 
     public void UIEVENT_Menu()

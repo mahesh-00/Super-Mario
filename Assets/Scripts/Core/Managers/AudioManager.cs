@@ -49,7 +49,11 @@ public class AudioManager : MonoBehaviour
             _gameScreenAudioSource.PlayOneShot(_dieSound);
             _ambientAudioSource.Stop();
         }; 
-        GameManager.Instance.OnWinPointReached += () => _gameScreenAudioSource.PlayOneShot(_flagTriggerSound);
+        GameManager.Instance.OnWinPointReached += () => 
+        {
+            _gameScreenAudioSource.PlayOneShot(_flagTriggerSound);
+            _ambientAudioSource.Stop();
+        };
         GameManager.Instance.OnCastleReached += () => _gameScreenAudioSource.PlayOneShot(_winSound);
         GameManager.Instance.OnGameCompleted += () => _ambientAudioSource.Stop();
         OnEnemyKilled += () => _gameScreenAudioSource.PlayOneShot(_enemyKilledSound);
@@ -70,7 +74,11 @@ public class AudioManager : MonoBehaviour
             _gameScreenAudioSource.PlayOneShot(_dieSound);
             _ambientAudioSource.Stop();
         } ;
-        GameManager.Instance.OnWinPointReached -= () => _gameScreenAudioSource.PlayOneShot(_flagTriggerSound);
+          GameManager.Instance.OnWinPointReached -= () => 
+        {
+            _gameScreenAudioSource.PlayOneShot(_flagTriggerSound);
+            _ambientAudioSource.Stop();
+        };
         GameManager.Instance.OnCastleReached -= () => _gameScreenAudioSource.PlayOneShot(_winSound);
         GameManager.Instance.OnGameCompleted -= () => _ambientAudioSource.Stop();
         OnEnemyKilled -= () => _gameScreenAudioSource.PlayOneShot(_enemyKilledSound);
