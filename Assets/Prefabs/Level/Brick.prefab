@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hasCoins: 0
   _breakBrickVFX: {fileID: 2803742990566989205, guid: cd8972d3684eeeb4ba896b540a92425d, type: 3}
-  brickState: 1
+  brickState: 0
 --- !u!61 &2856479080928687877
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -110,11 +110,11 @@ BoxCollider2D:
   m_GameObject: {fileID: 1097461777675934}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 67877f84ca035478ebed0ac8c79c8561, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0051727295, y: 0.0017254353}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -125,5 +125,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.8309021, y: 0.810204}
+  m_EdgeRadius: 0.1
