@@ -31,7 +31,7 @@ public class PlayerJumpState : PlayerBaseState
             float walkDirection = PlayerStateMachine.IsWalkingRight?PlayerStateMachine.WalkSpeed:PlayerStateMachine.IsWalkingLeft?-PlayerStateMachine.WalkSpeed:0;
             PlayerStateMachine.Rb.AddForce( new Vector2(walkDirection,PlayerStateMachine.JumpSpeed), ForceMode2D.Impulse);
             PlayerStateMachine.AllowtoJump = false;
-            //Debug.Log("jumping now....");
+            Debug.Log("jumping now....");
         }
         CheckSwitchStates();
     }

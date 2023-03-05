@@ -34,6 +34,7 @@ public class ItemsHandler : MonoBehaviour
     private void ResetCoins()
     {
         _totalCoins = 0;
+        OnCoinsUpdated?.Invoke(_totalCoins);
     }
 
 

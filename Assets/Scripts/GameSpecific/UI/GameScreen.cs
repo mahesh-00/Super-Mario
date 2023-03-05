@@ -35,15 +35,20 @@ public class GameScreen : CanvasView
         _settingsScreen.SetActive(false);
         GameManager.Instance.OnGameCompleted?.Invoke();
         UIManager.Instance.HandleGameStateChangeUI(GameManager.GameState.StartMenuState);
+        Time.timeScale = 1;
     }
 
     public void UIEVENT_Resume()
     {
         _settingsScreen.SetActive(false);
+        Time.timeScale = 1;
+         AudioManager.Instance.OnGamePaused(false);
     }
 
     public void UIEVENT_OpenSettings()
     {
         _settingsScreen.SetActive(true);
+        Time.timeScale = 0;
+        AudioManager.Instance.OnGamePaused(true);
     }
 }

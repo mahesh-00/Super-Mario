@@ -42,14 +42,18 @@ public class EnemyController : MonoBehaviour
 
         // Cast a ray downward from the enemy's position
         RaycastHit2D hitGroundLeft = Physics2D.Raycast(_groundRayTF.position - new Vector3(1, 0, 0), Vector2.down);
-        RaycastHit2D hitGroundRight = Physics2D.Raycast(_groundRayTF.position + new Vector3(1, 0, 0), -Vector2.up);
-        Debug.DrawRay(_groundRayTF.position - new Vector3(1, 0, 0), -Vector2.up * hitGroundLeft.distance);
+        RaycastHit2D hitGroundRight = Physics2D.Raycast(_groundRayTF.position + new Vector3(1, 0, 0), Vector2.down);
+        Debug.DrawRay(_groundRayTF.position + new Vector3(1, 0, 0), Vector2.down * hitGroundRight.distance);
 
         if (hitGroundLeft.collider == null)
             _isWalkingLeft = _isWalkingLeft ? false : true;
 
         if (hitGroundRight.collider == null)
+        {
             _isWalkingLeft = _isWalkingLeft ? false : true;
+            
+        }
+            
 
     }
 

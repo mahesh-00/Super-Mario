@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -23,6 +24,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip _flagTriggerSound;
     [SerializeField] private AudioClip _winSound;
     [SerializeField] private AudioClip _dieSound;
+    [SerializeField] private AudioClip _buttonClickSound;
 
     public Action OnEnemyKilled;
     public Action OnBrickHit;
@@ -85,16 +87,25 @@ public class AudioManager : MonoBehaviour
         OnBrickHit -= () => _gameScreenAudioSource.PlayOneShot(_brickBreakSound);
     }
 
-    private void PlayBgMusic()
+    private async void PlayBgMusic()
     {
+        await Task.Delay(800);
         _ambientAudioSource.clip = _bgMusic;
         _ambientAudioSource.Play();
     }
 
-     private void PlayGameSound(AudioClip _audioClip)
+     public void UIEVENT_OnButtonClick()
      {
-        _gameScreenAudioSource.clip = _coinCollectedSound;
+        _gameScreenAudioSource.clip = _buttonClickSound;
         _gameScreenAudioSource.Play();
+     }
+
+     public void OnGamePaused(bool isPaused)
+     {
+        if(isPaused)
+            _ambientAudioSource.Pause();
+        else
+            _ambientAudioSource.Play();
      }
 
 }
