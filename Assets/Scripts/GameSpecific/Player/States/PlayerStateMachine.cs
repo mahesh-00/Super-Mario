@@ -118,7 +118,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     IEnumerator WaiforWinAnimation()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2.5f);
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
          //_currentState.SwitchStates(_playerStateFactory.Idle());
         yield return new WaitForSeconds(2f);

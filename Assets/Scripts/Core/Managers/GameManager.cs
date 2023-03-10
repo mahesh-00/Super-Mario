@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
     {
        _currentLevel = Instantiate(LevelData.LevelPrefabs[0].LevelPrefab);
        _player = Instantiate(LevelData.PlayerPrefab);
+       GameplayTimer.Instance.StartTimer();
        _cinemachineVirtualCamera.Follow = _player.transform;
        _cinemachineVirtualCamera.LookAt =_player.transform;
        _cinemachineVirtualCamera.transform.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = LevelData.LevelPrefabs[0].BoundShape2D;
@@ -96,6 +97,7 @@ public class GameManager : MonoBehaviour
     }
     private void HandleLevelCompleteState()
     {
+        GameplayTimer.Instance.StopTimer();
         Destroy(_player);
         Destroy(_currentLevel);
     }

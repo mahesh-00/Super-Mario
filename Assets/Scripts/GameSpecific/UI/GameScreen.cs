@@ -7,8 +7,10 @@ using System;
 
 public class GameScreen : CanvasView
 {
-    [SerializeField]private TMP_Text _coinsCollectedText;
+    [SerializeField]private TextMeshProUGUI _coinsCollectedText;
+    [SerializeField]private TextMeshProUGUI _timerTxt;
     [SerializeField]private GameObject _settingsScreen;
+    
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -18,6 +20,11 @@ public class GameScreen : CanvasView
     void OnDisable()
     {
         ItemsHandler.OnCoinsUpdated -= UpdateCoinsCollected;
+    }
+
+    private void Update()
+    {
+        _timerTxt.text = GameplayTimer.Instance?.GetTime();
     }
 
     private void UpdateLivesRemainingUI(int obj)

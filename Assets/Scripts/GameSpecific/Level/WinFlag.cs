@@ -18,7 +18,7 @@ public class WinFlag : MonoBehaviour
     {
         transform.DOMove(transform.position - new Vector3(0,7,0),1.5f).onComplete+= () => 
         {
-            Debug.Log("castle reaschded invokded");
+            //Debug.Log("castle reaschded invokded");
             GameManager.Instance.OnCastleReached?.Invoke();
         };
     }

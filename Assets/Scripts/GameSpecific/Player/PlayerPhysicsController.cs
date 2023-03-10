@@ -7,6 +7,7 @@ public class PlayerPhysicsController : MonoBehaviour
     [SerializeField] private Transform _groundRayTF;
     private PlayerStateMachine _playerStateMachine;
     [SerializeField]private LayerMask _groundMask;
+    private bool _hasReachedEnd;
 
     void Start()
     {
@@ -39,8 +40,12 @@ public class PlayerPhysicsController : MonoBehaviour
         // }
            
 
-        if (collision.gameObject.CompareTag(CONSTANTS.WINPOINT))
+        if (collision.gameObject.CompareTag(CONSTANTS.WINPOINT) && !_hasReachedEnd)
+        {
+            _hasReachedEnd = true;
             GameManager.Instance.OnWinPointReached?.Invoke();
+        }
+            
 
         if (collision.gameObject.CompareTag(CONSTANTS.FALLTRIGGER) && _playerStateMachine.IsAlive)
             GameManager.Instance.OnPlayerKilled?.Invoke();

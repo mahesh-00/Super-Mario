@@ -20,7 +20,7 @@ public class PlayerDeadState : PlayerBaseState
     {
         if (!_isFalling)
         {
-            PlayerStateMachine.Rb.velocity = new Vector2(0, 3) * 0.8f;
+            PlayerStateMachine.Rb.velocity = new Vector2(0, 3) * 1.2f;
             //Debug.Log("jumping");
         }
 
@@ -45,7 +45,7 @@ public class PlayerDeadState : PlayerBaseState
 
     public override void CheckSwitchStates()
     {
-        if (PlayerStateMachine.transform.position.y < -100)
+        if (PlayerStateMachine.transform.position.y < -150)
             GameManager.Instance.OnGameCompleted?.Invoke();
     }
 }

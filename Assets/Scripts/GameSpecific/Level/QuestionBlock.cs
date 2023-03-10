@@ -21,7 +21,7 @@ public class QuestionBlock : MonoBehaviour
          if(collision.transform.position.y < transform.position.y)
          {
             GameObject coin =  Instantiate(GameManager.Instance.LevelData.Coin,transform.position ,Quaternion.identity);
-            coin.transform.DOMove(coin.transform.position + new Vector3(0,1.3f,0),0.6f).onComplete += () => Destroy(coin.gameObject);
+            coin.transform.DOMove(coin.transform.position + new Vector3(0,2f,0),0.6f).onComplete += () => Destroy(coin.gameObject);
              GameManager.Instance.OnCoinCollected?.Invoke();
             _isBlockHit = true;
             _blockAnimator.SetBool("used",true);
